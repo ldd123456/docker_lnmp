@@ -40,13 +40,14 @@ RUN apt-get update && \
 # install php extentions
 RUN pecl channel-update pecl.php.net \
     && docker-php-ext-configure gd \
+    #php7.4之后不开启
     --with-jpeg-dir=/usr/include/ \
     --with-freetype-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) zip bz2 bcmath mysqli pdo_mysql gd gmp sockets pcntl sysvmsg sysvsem sysvshm \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached \
+#    && pecl install mongodb \
+#    && docker-php-ext-enable mongodb \
+#    && pecl install memcached \
+#    && docker-php-ext-enable memcached \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && pecl install imagick \

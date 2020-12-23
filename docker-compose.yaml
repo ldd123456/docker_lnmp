@@ -11,9 +11,8 @@ services:
       - PHP_VERSION=${PHP_VERSION}
       - SWOOLE_VERSION=${SWOOLE_VERSION}
       - INSTALL_XDEBUG=${INSTALL_XDEBUG}
-      - HIREDIS_VERSION=${HIREDIS_VERSION}
-    image: lnmp-php
-    container_name: compose-php
+    image: lnmp-php-${PHP_VERSION}
+    container_name: compose-php-${PHP_VERSION}
     restart: always
     volumes:
       - ${WWWROOT}:/data/wwwroot
@@ -40,6 +39,12 @@ services:
       - 80:80
     networks:
       - lnmp-tier
+###REDIS###
+  redis:
+      image: redis:${REDIS_VERSION}
+      ports:
+          - 6379:6379
+      container_name: redis
 # ### MYSQL ###
 #   mysql:
 #     build:
